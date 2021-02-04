@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+            /*overflow: hidden; /*문서를 벗어나면 보이지 않게함 - 스크롤 안됨*/
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            background-color: blanchedalmond;
+            margin-bottom: 10px;
+        }
+
+        .special {
+            background-color: tomato;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="special"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>    
+    
+    <script>
+        const special = document.querySelector('.special');
+        special.addEventListener('click', (event) => {
+            const rect = special.getBoundingClientRect();
+            console.log(rect);
+            console.log(`page: ${event.pageX}, ${event.pageY}`);                        
+            console.log(`client: ${event.clientX}, ${event.clientY}`);
+        });
+
+        // const rect = document.querySelector('.rect');
+        // const clientRect = rect.getBoundingClientRect();        
+        // rect.addEventListener('click', (e) => {
+        //     console.log(e.screenX);
+        //     console.log(e.screenY);
+        // });
+    </script>
+</body>
+</html>
