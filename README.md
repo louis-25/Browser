@@ -14,9 +14,19 @@
   page : 마우스로 클릭한곳이 페이지상에서 위치하는 좌표
 
 - ## Window Load
+
   스크립트 defer옵션 : HTML만 완료되면 호출이된다
   window.addEventListener(' '()=>{});  
   DOMContentLoaded : HTML만 다운로드 완료되면 이벤트 발생
   load : 모든 리소스(css, image)가 다운받아진 후에 이벤트 발생
   beforeunload : 리소스가 다운받아지기 전에 발생하는 이벤트
   unload : 페이지가 unload 되었을때 발생되는 이벤트
+
+- ## 좌표 프로젝트
+  mousemove이벤트를 등록하여 마우스커서를 따라다니고 좌표를 표시해보자 <br/>
+  JavaScript에서 css값과 HTML요소를 변경할 수 있다<br/>
+  <b>
+  const tag = document.querySelector('.tag');<br/>
+  tag.style.top = `${y}px`; <br/>
+  tag.innerHTML = `${x}px ${y}px`; <br/>
+  </b>
