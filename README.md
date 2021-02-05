@@ -6,6 +6,7 @@
   window.outer : 브라우저 창 크기 <br>
   window.inner : 브라우저의 페이지가 표기되는 부분 (스크롤바 포함) <br>
   documentElement.clientWidth : 스크롤바를 제외한 영역 <br>
+  window.scrollBy : 원하는 좌표로 스크롤을 이동한다 <br>
 
 - ## chapter 2 - 좌표
 
@@ -23,10 +24,18 @@
   unload : 페이지가 unload 되었을때 발생되는 이벤트
 
 - ## 좌표 프로젝트
+
   mousemove이벤트를 등록하여 마우스커서를 따라다니고 좌표를 표시해보자 <br/>
   JavaScript에서 css값과 HTML요소를 변경할 수 있다<br/>
   <b>
   const tag = document.querySelector('.tag');<br/>
   tag.style.top = `${y}px`; <br/>
   tag.innerHTML = `${x}px ${y}px`; <br/>
+  </b>
+
+- ## Find a rabbit
+  버튼 클릭시 원하는 위치좌표로 스크롤을 해보자<br/>
+  <b>
+  const rabbit = document.querySelector('.rabbit');<br/>
+  rabbit.scrollIntoView({behavior:"smooth", block: 'center'});<br>
   </b>

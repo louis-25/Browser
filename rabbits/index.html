@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll</title>
+    <style>
+      body {
+        background-color: grey;
+        text-align: center;
+      }
+
+      div {
+        width: 150px;
+        height: 150px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-size: 150px 150px;
+        background-color: wheat;        
+        margin: 10px auto;
+      }    
+
+      .carrot {
+        background-image: url('./img/carrot.png');               
+        background-repeat:no-repeat;
+        background-position: center;                 
+      }
+
+      .rabbit {
+        background-image: url('./img/rabbit.png');               
+        background-repeat:no-repeat;
+        background-position: center; 
+      }
+
+      button {        
+        outline: none;
+        border-radius: 5px;
+        background-color: tomato;
+        color: white;
+        font-size: 24px;
+        margin: 16px 0;
+        cursor: pointer;        
+      }
+    </style>
+  </head>
+  <body>
+    <button class="search_btn">Find a rabbit</button>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="rabbit"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>
+    <div class="carrot"></div>    
+    <script>
+      const search_btn = document.querySelector('.search_btn');
+      const rabbit = document.querySelector('.rabbit');
+      search_btn.addEventListener('click', (event)=> {
+        // const rabbit_pos = rabbit.getBoundingClientRect();
+        // console.log(rabbit_pos);        
+        // window.scrollBy({left:rabbit_pos.left, top:rabbit_pos.top, behavior:"smooth"});
+        rabbit.scrollIntoView({behavior:"smooth", block: 'center'});
+      });
+    </script>
+  </body>
+</html>
