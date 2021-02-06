@@ -1,14 +1,54 @@
 'use strict';
 
 const CARROT_SIZE = 80;
+const CARRPT_COUNT = 5;
+const BUG_COUNT = 5;
 const field = document.querySelector('.game__field');
 const fieldRect = field.getBoundingClientRect(); //field의 전체적인 size와 position을 알 수 있다
+const gameBtn = document.querySelector('.game__button');
+const gameTimer = document.querySelector('.game__timer');
+const gameScore = document.querySelector('.game__score');
+
+let started = false;
+let score = 0;
+let timer = undefined;
+
+gameBtn.addEventListener('click', () => {
+    if(started) {
+        stopGame();
+    } else {
+        startGame();
+    }
+    started = !started;
+});
+
+function startGame() {
+    initGame();
+    showStopButton();
+    showTimerAndScore();
+}
+
+function stopGame() {
+    
+}
+
+function showTimerAndScore() {
+    gameTimer.style.visibility = 'visible';
+    gameScore.style.visibility = 'visible';
+}
+
+function showStopButton() {
+    const icon = gameBtn.querySelector('.fa-play');
+    icon.classList.add('fa-stop');
+    icon.classList.remove('fa-play');
+}
 
 function initGame() {
-    //벌레와 당근을 생성한뒤 field에 추가해줌
-    console.log(fieldRect);
-    addItem('carrot', 5, 'img/carrot.png');
-    addItem('bug', 5, 'img/bug.png');
+    field.innerHTML = '';
+    gameScore.innerText = CARRPT_COUNT;
+    //벌레와 당근을 생성한뒤 field에 추가해줌    
+    addItem('carrot', CARRPT_COUNT, 'img/carrot.png');
+    addItem('bug', BUG_COUNT, 'img/bug.png');
 }
 
 function addItem(className, count, imgPath) {
@@ -16,6 +56,7 @@ function addItem(className, count, imgPath) {
     const y1 = 0;
     const x2 = fieldRect.width - CARROT_SIZE;
     const y2 = fieldRect.height - CARROT_SIZE;
+    
     for(let i = 0 ; i < count ; i++) {
         const item = document.createElement('img');
         item.setAttribute('class',className);
@@ -32,5 +73,3 @@ function addItem(className, count, imgPath) {
 function randomNumber(min, max) {
     return Math.random() * (max - min) + min;
 }
-
-initGame();
