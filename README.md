@@ -34,8 +34,29 @@
   </b>
 
 - ## Find a rabbit
+
   버튼 클릭시 원하는 위치좌표로 스크롤을 해보자<br/>
   <b>
   const rabbit = document.querySelector('.rabbit');<br/>
   rabbit.scrollIntoView({behavior:"smooth", block: 'center'});<br>
   </b>
+
+- ## shopping_list
+
+  HTML CSS JavaScript를 사용하여 쇼핑리스트를 작성해보자<br>
+  HTML로 골격을 세우고, CSS로 꾸미고, JavaScript로 동적인 요소를 추가<br>
+  JavaScript로 HTML요소를 동적으로 생성하여 추가할 수 있다<br>
+
+- ## 이벤트
+
+  addEventListner : 특정요소에 이벤트를 등록한다<br>
+  removeEventListner : 특정요소에 이벤트를 제거한다<br>
+  dispatchEvent : 인공적으로 이벤트를 발생<br>
+
+- ## 이벤트 capturing, bubbling
+  이벤트 요소가 겹쳐있을때
+  capturing : 상위에서 하위요소로
+  bubbling : 하위에서 상위요소로
+  이벤트가 겹쳐서 일어나는것을 말한다
+  event.target : 이벤트가 발생한 요소
+  event.currentTarget : 현재 요소
