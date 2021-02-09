@@ -101,7 +101,17 @@ button {
     border-radius: 50%;
 }
 
-.popup__message {
+.pop-up__message {
     display: block;
     font-size: 24px;
+}
+
+.carrot,
+.bug {
+    transition: all 100ms ease-in;
+}
+
+.carrot:hover,
+.bug:hover {
+    transform: scale(1.1);
 }
