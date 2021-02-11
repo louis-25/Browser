@@ -1,7 +1,37 @@
 import Field from './field.js';
 import * as sound from './sound.js';
 
-export default class Game {
+/*
+Builder Pattern
+빌더패턴을 사용함으로 인해 Game클래스를 외부에 노출시키지않고
+간단 명료하게 값을 설정할 수 있다
+*/
+export default class GameBuilder {
+    gameDuration(duration)  {
+        this.gameDuration = duration;
+        return this;
+    }
+
+    carrotCount(num) {
+        this.carrotCount = num;
+        return this;
+    }
+
+    bugCount(num) {
+        this.bugCount = num;
+        return this;
+    }
+
+    build() {
+        return new Game(
+            this.gameDuration,
+            this.carrotCount,
+            this.bugCount
+        );
+    }
+}
+
+class Game {
     constructor(gameDuration, carrotCount, bugCount) {
         this.gameDuration = gameDuration;
         this.carrotCount = carrotCount;
@@ -94,6 +124,7 @@ export default class Game {
     }
     
     startGameTimer() {    
+        // console.log('hi'+this.gameDuration);
         let remainingTimeSec = this.gameDuration;
         this.updateTimerText(remainingTimeSec);
         this.timer = setInterval(()=>{
