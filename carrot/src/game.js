@@ -1,12 +1,19 @@
-import Field from './field.js';
+import { Field, ItemType } from './field.js';
 import * as sound from './sound.js';
+
+//자바스크립트로 타입 보장하는법
+export const Reason = Object.freeze({
+    win: 'win',
+    lose: 'lose',
+    cancel: 'cancel',
+});
 
 /*
 Builder Pattern
 빌더패턴을 사용함으로 인해 Game클래스를 외부에 노출시키지않고
 간단 명료하게 값을 설정할 수 있다
 */
-export default class GameBuilder {
+export class GameBuilder {
     gameDuration(duration)  {
         this.gameDuration = duration;
         return this;
@@ -42,7 +49,7 @@ class Game {
         this.gameScore = document.querySelector('.game__score');
         this.gameBtn.addEventListener('click', () => {                
             if(this.started) {
-                this.stop();
+                this.stop(Reason.cancel);
             } else {
                 this.start();
             }    
@@ -70,41 +77,26 @@ class Game {
         sound.playBackground();
     }
     
-    stop() {
+    stop(reason) {
         this.started = false;    
         this.stopGameTimer();
         this.hideGameButton();
-        //this.gameFinishBanner.showWithText('REPLAY?');    
-        sound.playAlert();
         sound.stopBackground();
-        this.onGameStop && this.onGameStop('cancel');
-    }
-
-    finish(win) {
-        this.started = false;       
-        this.hideGameButton();  
-        if(win) {        
-            sound.playWin();             
-        }else {        
-            sound.playBug();               
-        }
-        this.stopGameTimer();
-        sound.stopBackground();
-        this.onGameStop && this.onGameStop(win? 'win' : 'lose');
+        this.onGameStop && this.onGameStop(reason);
     }
 
     onItemClick = (item) => { //이벤트위임
         if(!this.started) {
             return;
         }    
-        if(item === 'carrot') { //당근        
+        if(item === ItemType.carrot) { //당근        
             this.score++;        
             this.updateScoreBoard();
             if(this.score === this.carrotCount) {
-                this.finish(true);
+                this.stop(Reason.win);
             }
-        } else if(item === 'bug') { //벌레                
-            this.finish(false);
+        } else if(item === ItemType.bug) { //벌레                
+            this.stop(Reason.lose);
         }
     };
     showStopButton() {
@@ -130,7 +122,7 @@ class Game {
         this.timer = setInterval(()=>{
             if(remainingTimeSec <= 0) {
                 clearInterval(this.timer);
-                this.finish(this.carrotCount === this.score);
+                this.stop(this.carrotCount === this.score ? Reason.win : Reason.lose);
                 return;
             }
             this.updateTimerText(--remainingTimeSec);
