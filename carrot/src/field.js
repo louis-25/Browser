@@ -1,6 +1,6 @@
 'use strict';
+import * as sound from './sound.js';
 
-const carrotSound = new Audio('./sound/carrot_pull.mp3');
 const CARROT_SIZE = 80;
 export default class Field {
     constructor(carrotCount, bugCount) {
@@ -9,7 +9,12 @@ export default class Field {
 
         this.field = document.querySelector('.game__field');
         this.fieldRect = this.field.getBoundingClientRect(); //field의 전체적인 size와 position을 알 수 있다
-        this.field.addEventListener('click', this.onClick)
+        /*
+        this는 어떤 클래스 안에 있는 함수를 다른 콜백으로 전달할 때는 그 함수가 포함
+        되어져 있는 클래스의 정보가 사라진다
+        그래서 this와 함수를 바인딩해줘야 한다 (화살표함수)
+        */
+        this.field.addEventListener('click', event => this.onClick(event))
     }
 
     init() {
@@ -45,7 +50,7 @@ export default class Field {
         const target = event.target;
         if(target.matches('.carrot')) { //당근
             target.remove();            
-            playSound(carrotSound);
+            sound.playCarrot();
             this.onClick && this.onItemClick('carrot');            
         } else if(target.matches('.bug')) { //벌레                
             this.onItemClick && this.onItemClick('bug');
